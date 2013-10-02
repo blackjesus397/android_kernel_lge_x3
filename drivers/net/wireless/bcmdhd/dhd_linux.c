@@ -4080,7 +4080,6 @@ dhd_preinit_ioctls(dhd_pub_t *dhd)
 	dhd->pktfilter[dhd->pktfilter_count++] = "105 0 0 12 0xFFFF 0x0806";
 #endif
 
-
 #if defined(SOFTAP)
 	if (ap_fw_loaded) {
 		dhd_enable_packet_filter(0, dhd);
@@ -5461,6 +5460,7 @@ dhd_dev_pno_reset(struct net_device *dev)
 
 	return (dhd_pno_clean(&dhd->pub));
 }
+
 /* Linux wrapper to call common dhd_pno_enable */
 int
 dhd_dev_pno_enable(struct net_device *dev,  int pfn_enabled)
@@ -5476,6 +5476,7 @@ dhd_dev_pno_set(struct net_device *dev, wlc_ssid_t* ssids_local, int nssid,
 	ushort  scan_fr, int pno_repeat, int pno_freq_expo_max)
 {
 	dhd_info_t *dhd = *(dhd_info_t **)netdev_priv(dev);
+
 	return (dhd_pno_set(&dhd->pub, ssids_local, nssid, scan_fr, pno_repeat, pno_freq_expo_max));
 }
 

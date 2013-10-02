@@ -1206,8 +1206,6 @@ osl_delay(uint usec)
 	}
 }
 
-
-
 /* Clone a packet.
  * The pkttag contents are NOT cloned.
  */

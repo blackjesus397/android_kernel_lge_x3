@@ -1195,6 +1195,12 @@ txglomfail:
 				pkt_len = (pkt_len + 3) & 0xFFFFFFFC;
 			else if (pkt_len % blk_size)
 				pkt_len += blk_size - (pkt_len % blk_size);
+#ifdef CONFIG_MMC_MSM7X00A
+			if ((pkt_len % 64) == 32) {
+				sd_trace(("%s: Rounding up TX packet +=32\n", __FUNCTION__));
+				pkt_len += 32;
+			}
+#endif /* CONFIG_MMC_MSM7X00A */
 			if ((write) && (!fifo))
 				err_ret = sdio_memcpy_toio(
 						gInstance->func[func],

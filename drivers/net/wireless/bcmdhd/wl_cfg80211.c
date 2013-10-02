@@ -10969,6 +10969,5 @@ static void wl_cfg80211_work_handler(struct work_struct * work)
 					iter->ndev->ieee80211_ptr->ps = true;
 			}
 		}
-
 	}
 }
