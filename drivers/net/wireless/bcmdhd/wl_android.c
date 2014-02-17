@@ -728,13 +728,6 @@ int wl_android_set_ibss_beacon_ouidata(struct net_device *dev, char *command, in
 	u16 kflags = in_atomic() ? GFP_ATOMIC : GFP_KERNEL;
 	s32 err = BCME_OK;
 
-	/* Check the VSIE (Vendor Specific IE) which was added.
-	 *  If exist then send IOVAR to delete it
-	 */
-	if (wl_cfg80211_ibss_vsie_delete(dev) != BCME_OK) {
-		return -EINVAL;
-	}
-
 	pcmd = command + strlen(CMD_SETIBSSBEACONOUIDATA) + 1;
 	for (idx = 0; idx < DOT11_OUI_LEN; idx++) {
 		hex[0] = *pcmd++;
@@ -795,11 +788,7 @@ int wl_android_set_ibss_beacon_ouidata(struct net_device *dev, char *command, in
 			kfree(vndr_ie);
 		}
 	}
-	else {
-		/* do NOT free 'vndr_ie' for the next process */
-		wl_cfg80211_ibss_vsie_set_buffer(vndr_ie, tot_len);
-	}
-
+	else 
 	if (ioctl_buf) {
 		kfree(ioctl_buf);
 	}
